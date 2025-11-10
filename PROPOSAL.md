@@ -30,7 +30,7 @@ The final output will answer:
 
 2. **Data Collection & Processing**
    - Collect historical data for Geneva:
-     - rent levels → Comparis.ch (web scraping)
+     - rent levels → Comparis.ch (web scraping (legal) / imoscout24(limited))
      - real-estate prices → Swiss Federal Statistical Office (API or CSV)
      - mortgage rates → Swiss National Bank API
 
@@ -66,4 +66,4 @@ The project will be considered successful if:
 - Export final results as downloadable PDF report
 
 ---
-**This project is technically challenging and demonstrates simulation, data science, visualization, testing, and clean code organization.**
+
