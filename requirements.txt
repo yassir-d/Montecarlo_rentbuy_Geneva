@@ -1,0 +1,21 @@
+# Core data science
+pandas
+numpy
+scipy
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine learning (stretch goal)
+scikit-learn
+
+# Web scraping / API
+requests
+beautifulsoup4
+
+# Utilities
+python-dotenv
+
+# Testing
+pytest
