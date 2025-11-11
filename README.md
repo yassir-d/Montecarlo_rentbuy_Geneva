@@ -1,51 +1,48 @@
-# Montecarlo_rentbuy_Geneva
-# 🏠 Rent vs Buy Decision Simulator — Geneva  
-**Data Science • Monte Carlo Simulation • Financial Modeling**
+## Rent vs Buy Decision Simulator — Geneva
 
----
+Monte Carlo Simulation • Data Science • Financial Modeling
 
-## Project Description
+Overview
 
-Deciding whether to **rent or buy** a property is one of the biggest financial decisions people face — especially in Geneva, where:
+Deciding whether to rent or buy property is one of the most important financial decisions — and in Geneva, it's even more complex due to:
 
-- Housing prices are high
-- Mortgage rates fluctuate
-- Rent inflation is unpredictable
-- Real estate data is hard to interpret
+High real-estate prices
 
-This project builds a **simulation-based decision tool** that models the financial outcome of renting vs buying in Geneva over time.
+Volatile mortgage interest rates
 
-Instead of simplistic calculators, this tool uses:
+Low rental vacancy rates
 
-Monte Carlo simulation (thousands of stochastic scenarios)  
-Real-world economic parameters (rent inflation, interest rates, property appreciation)  
-Optional ML forecasting (price prediction using regression)  
-Clear visualization of outcomes ("Buying wins in 68% of simulations")
+Uncertainty in market trends
 
-**User Output Example:**
+This project builds a data-driven simulation tool that compares the long-term financial outcome of renting vs buying.
+Unlike static online calculators, this tool incorporates uncertainty and randomness.
 
-> _"In Geneva, buying becomes financially better than renting after **7.3 years** with **74% confidence**."_
+## What This Project Does
 
----
+The model simulates thousands of financial scenarios and outputs the probability that buying is better than renting.
 
-## Features (MVP)
+Uses:
 
-| Component | Description |
-|----------|-------------|
-| Simulation Engine | Monte Carlo simulation for rent vs buy |
-| Data ingestion | Load or scrape Geneva housing & mortgage data |
-| Visualization | Matplotlib charts of outcome distributions |
-| Analysis result | Probability that buying is better |
+Component	Description
+Monte Carlo simulation	Models uncertainty: price growth, rent inflation, interest rates
+Real datasets	Swiss Federal Statistical Office (BFS), SNB API for mortgage rates
+(Optional) Machine Learning	Regression to forecast price appreciation
+Visualization	Probability distribution of financial outcomes
 
----
+## Example Output:
 
-## Stretch Goals (Not sure yet)
+"Based on current data, buying becomes more financially advantageous after 7.3 years, with 74% probability."
 
-- ML-based forecasting (Random Forest / Linear Regression)
-- Streamlit UI
-- Automatic PDF report generation
+## Data Science Tools & Methods
 
----
+Python (NumPy, Pandas, Matplotlib)
 
+Monte Carlo Simulation (lognormal growth processes)
 
+Financial modeling (equity, amortization, opportunity cost)
 
+(Stretch goal) Machine Learning models:
+
+Linear Regression / Random Forest (forecast price change)
+
+Logistic Regression (predict Buy vs Rent decision)
