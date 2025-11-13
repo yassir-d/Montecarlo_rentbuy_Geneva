@@ -7,9 +7,9 @@
 
 Deciding whether to rent or buy a home is one of the most important financial decisions individuals face. In Geneva, this decision is particularly complex due to:
 
-Some of the highest housing prices in Europe
+Some of the highest housing prices in the world
 
-Extremely low vacancy rates
+Extremely low vacancy rates (~0.7%)
 
 Large fluctuations in mortgage interest rates
 
@@ -25,7 +25,7 @@ Final Output Example:
 
 All data sources are open and legally accessible:
 
-Data Type	Source	Access Type
+Data                    Type	               Source	            Access Type
 Real estate price index	Swiss Federal Statistical Office (BFS)	Open dataset / CSV
 Mortgage rates	Swiss National Bank (SNB) API	Public API
 Rental price index & inflation	Genève Open Data / BFS	Open dataset
@@ -53,8 +53,16 @@ Objective 1: Forecast Real Estate Price Appreciation
 Since individual property transaction data is limited, aggregate-level modeling will be used.
 
 Model	Inputs	Output	Validation
-Linear Regression	past 4–8 quarters of price index, rent inflation, mortgage rates	Predicted % price change next year	Time-series cross-validation
-Random Forest Regressor	same features + volatility indicators	Predicted % price change next year	RMSE, R²
+
+Model : Linear Regression
+Input : past 4–8 quarters of price index, rent inflation, mortgage rates	
+Output : Predicted % price change next year	
+Validation : Time-series cross-validation
+
+Model : Random Forest Regressor 
+Inputs same features + volatility indicators	
+Output : Predicted % price change next year
+Validation : RMSE, R²
 
 To validate the model:
 
@@ -62,11 +70,16 @@ Use rolling-origin time series validation (train on t₀–tₙ, test on tₙ₊
 
 Evaluate predictive performance on held-out years.
 
-Compare to a baseline (e.g., simple moving average model).
+Compare to a baseline (e.g., simple moving average model (MA)).
 
 Objective 2: Predict Rent vs Buy Advantage
+
 Model	Inputs	Output	Evaluation
-Logistic Regression	predicted appreciation, mortgage rates, rent yield	1 = Buy better, 0 = Rent better	Accuracy, confusion matrix, ROC-AUC
+
+Model : Logistic Regression
+Input : predicted appreciation, mortgage rates, rent yield
+OUtput : 1 = Buy better, 0 = Rent better	
+Evaluation : Accuracy, confusion matrix, ROC-AUC
 Decision Tree (optional)	interpretable buy/rent threshold	same	
 
 **Step 3 — Monte Carlo Simulation**

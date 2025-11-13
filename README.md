@@ -1,48 +1,64 @@
 ## Rent vs Buy Decision Simulator — Geneva
 
-Monte Carlo Simulation • Data Science • Financial Modeling
+Data Science • Machine Learning • Monte Carlo Simulation
 
-Overview
+## Overview
 
-Deciding whether to rent or buy property is one of the most important financial decisions — and in Geneva, it's even more complex due to:
+This project develops a data-driven decision tool to evaluate whether renting or buying a home in Geneva, Switzerland is financially better under market uncertainty.
 
-High real-estate prices
+Unlike simple calculators, it combines machine learning forecasts and Monte Carlo simulations to model housing prices, rent inflation, and mortgage rates.
 
-Volatile mortgage interest rates
+Example output:
+“Buying becomes more advantageous than renting after 7.2 years with 72 % confidence.”
 
-Low rental vacancy rates
+## Objectives
 
-Uncertainty in market trends
+Forecast future housing price appreciation using open Swiss data
 
-This project builds a data-driven simulation tool that compares the long-term financial outcome of renting vs buying.
-Unlike static online calculators, this tool incorporates uncertainty and randomness.
+Simulate economic uncertainty with Monte Carlo methods
 
-## What This Project Does
+Compare wealth evolution for rent vs buy decisions
 
-The model simulates thousands of financial scenarios and outputs the probability that buying is better than renting.
+Quantify probability that buying outperforms renting
 
-Uses:
+## Methodology
+Data
 
-Component	Description
-Monte Carlo simulation	Models uncertainty: price growth, rent inflation, interest rates
-Real datasets	Swiss Federal Statistical Office (BFS), SNB API for mortgage rates
-(Optional) Machine Learning	Regression to forecast price appreciation
-Visualization	Probability distribution of financial outcomes
+BFS – Real-estate price index
 
-## Example Output:
+SNB API – Mortgage interest rates
 
-"Based on current data, buying becomes more financially advantageous after 7.3 years, with 74% probability."
+Open Data Genève – Rent levels & inflation
+(No unauthorized scraping of commercial sites)
 
-## Data Science Tools & Methods
+Machine Learning
+Task	Model	Validation
+Predict price appreciation	Linear Regression / Random Forest	Rolling time-series CV
+Classify Buy vs Rent	Logistic Regression	Train/test split
+Simulation
 
-Python (NumPy, Pandas, Matplotlib)
+Monte Carlo approach:
 
-Monte Carlo Simulation (lognormal growth processes)
+Price growth ~ lognormal process (μ = ML mean)
 
-Financial modeling (equity, amortization, opportunity cost)
+Rent inflation ~ random walk
 
-(Stretch goal) Machine Learning models:
+Interest rate ~ AR(1)
 
-Linear Regression / Random Forest (forecast price change)
+Each run computes net wealth for renting vs buying → probability that buying wins.
 
-Logistic Regression (predict Buy vs Rent decision)
+## Expected Output
+
+Distribution of rent vs buy outcomes
+
+Probability curve of when buying becomes better
+
+Clear visualizations (Matplotlib)
+
+## Success Criteria
+
+Working ML model for housing price appreciation
+
+Probabilistic simulation results
+
+Transparent, reproducible code and documentation
