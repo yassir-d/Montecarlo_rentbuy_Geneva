@@ -1,101 +1,121 @@
-**Title** : Rent vs Buy Decision Simulator — Geneva
-**Category** : Data Science + Machine Learning + Monte Carlo Simulation
+## Project Proposal
 
-1. ## Problem Motivation
+## Title: Rent vs Buy Decision Simulator — Geneva
+## Category: Data Science + Machine Learning + Monte Carlo Simulation
 
-Deciding whether to rent or buy a home is one of the most important personal financial decisions. In Geneva, the problem is particularly challenging because:
+**1. Problem Motivation**
 
-housing prices are among the highest in Europe,
+Deciding whether to rent or buy a home is one of the most important financial decisions individuals face. In Geneva, this decision is particularly complex due to:
 
-vacancy rates are extremely low,
+Some of the highest housing prices in Europe
 
-mortgage rates fluctuate significantly.
+Extremely low vacancy rates
 
-Most online calculators oversimplify the problem: they assume fixed appreciation rates and no uncertainty. This leads individuals to make decisions based on intuition rather than data.
+Large fluctuations in mortgage interest rates
 
-Goal: Build a simulation-based decision tool that compares renting vs buying under uncertainty, using real data and machine learning.
-Final output example:
+Most online “rent vs buy” calculators use fixed growth rates and ignore uncertainty. This project aims to build a data-driven decision simulator that incorporates both economic uncertainty and data-based forecasts of housing prices.
 
-“Based on market conditions in Geneva, buying becomes financially more advantageous than renting after X years with Y% confidence.”
+Goal: Build a simulation-based and machine learning–enhanced tool that compares renting vs buying under realistic market volatility.
 
-2. ## Data & Legality
+Final Output Example:
 
-Data will be collected exclusively from legal and open data sources:
+“Based on Geneva market data, buying becomes more advantageous than renting after 7.2 years with 72% confidence.”
 
-Data Type	Source	Access
+**2. Data & Legality**
+
+All data sources are open and legally accessible:
+
+Data Type	Source	Access Type
 Real estate price index	Swiss Federal Statistical Office (BFS)	Open dataset / CSV
-Mortgage interest rates	Swiss National Bank API (SNB)	Public API
-Rental price levels & inflation	Open Data Genève / BFS	Open dataset
-Optional listing sample (if permitted)	Comparis / ImmoScout24	Only manually downloaded public datasets — no scraping without explicit authorization
+Mortgage rates	Swiss National Bank (SNB) API	Public API
+Rental price index & inflation	Genève Open Data / BFS	Open dataset
+Optional listing samples	Comparis / ImmoScout24	Manual download only (no scraping unless explicitly allowed)
 
-No scraping of commercial websites will be performed unless Terms of Service explicitly allow it.
+No automated scraping of commercial sites will be done unless explicitly permitted by their Terms of Service.
 
-3. ## Methodology (Core Data Science + ML Content)
-Step 1 — Data Collection & Preprocessing
+**3. Methodology (Core Data Science + ML)**
 
-Load data from BFS, SNB, Genève Open Data.
+**Step 1 — Data Collection & Preprocessing**
 
-Clean, merge, transform into time series (monthly or quarterly).
+Load and merge quarterly time series from BFS, SNB, and Genève Open Data.
 
-## Step 2 - Machine Learning Models
-Goal	Model	Output
-Estimate future real-estate price appreciation	Random Forest Regression + Linear Regression	Forecast % price change
-Predict whether buying is financially better than renting	Logistic Regression / Decision Tree	Classification: Buy vs Rent
+Clean missing values, compute derived indicators:
 
-Evaluation:
+Price growth rate, rent inflation, mortgage rate change
 
-Train/test split
+Lagged features (t−1, t−2, etc.) to capture trends
 
-RMSE (for regression)
+Split into training and testing sets (e.g., 2010–2022 train, 2023–2024 test).
 
-Accuracy + confusion matrix + ROC (for classification)
+**Step 2 — Machine Learning Estimation**
+Objective 1: Forecast Real Estate Price Appreciation
 
-Optional stretch goal:
+Since individual property transaction data is limited, aggregate-level modeling will be used.
 
-K-means clustering to segment Geneva neighborhoods by affordability
+Model	Inputs	Output	Validation
+Linear Regression	past 4–8 quarters of price index, rent inflation, mortgage rates	Predicted % price change next year	Time-series cross-validation
+Random Forest Regressor	same features + volatility indicators	Predicted % price change next year	RMSE, R²
 
-## Step 3 — Monte Carlo Simulation
+To validate the model:
 
-Simulate thousands of future scenarios using stochastic processes:
+Use rolling-origin time series validation (train on t₀–tₙ, test on tₙ₊₁).
 
-Housing price growth → lognormal process
+Evaluate predictive performance on held-out years.
 
-Rent inflation → random walk
+Compare to a baseline (e.g., simple moving average model).
 
-Interest rates → volatility from SNB data
+Objective 2: Predict Rent vs Buy Advantage
+Model	Inputs	Output	Evaluation
+Logistic Regression	predicted appreciation, mortgage rates, rent yield	1 = Buy better, 0 = Rent better	Accuracy, confusion matrix, ROC-AUC
+Decision Tree (optional)	interpretable buy/rent threshold	same	
 
-For each simulation:
+**Step 3 — Monte Carlo Simulation**
 
-Compute net wealth after N years if renting (investing savings)
+Use stochastic modeling to represent economic uncertainty:
 
-Compute net wealth after N years if buying (equity + resale value)
+House price growth: lognormal process (μ = ML-predicted mean, σ = historical volatility)
+
+Rent inflation: random walk with drift
+
+Mortgage rates: AR(1) process from SNB data
+
+For each simulation (e.g. 10,000 runs):
+
+Compute net wealth after N years for renting vs buying:
+
+Renting: invest down payment and compute portfolio growth
+
+Buying: mortgage amortization + equity growth + resale value
+
+Return probability that buying outperforms renting.
 
 Output:
+“Buying outperforms renting in 68% of simulations.”
 
-“Buying is financially better in 68.4% of simulated scenarios.”
+**Step 4 — Visualization**
 
-Step 4 — Visualization
+Time evolution of expected wealth for rent vs buy
 
-Time evolution of wealth under rent vs buy
+Distribution of financial outcomes (histogram or KDE)
 
-Density distribution of outcomes
+Probability that buying wins as a function of time horizon
 
-Probability that buying beats renting
+**4. Success Criteria**
 
-## 4. Success Criteria
+The project will be successful if:
 
-The project is successful if:
+The model can predict real-estate price appreciation with reasonable accuracy.
 
-A working Python tool runs simulations and ML predictions.
+The simulation produces probabilistic outcomes for renting vs buying.
 
-Results are data-driven, quantified, and visualized.
+All code is modular, tested, and documented.
 
-Code is version-controlled, structured, and documented.
+Results are visualized clearly for interpretation.
 
-## 5. Stretch Goals (if time permits)
+**5. Stretch Goals** (If time allows and optional)
 
-Streamlit web app for interactive decision tools
+Add a Streamlit web app for interactive simulation
 
-Neighborhood affordability ranking using clustering
+Cluster neighborhoods (using K-means) by affordability and volatility
 
-Export financial reports to PDF
+Export a PDF report summarizing simulated outcomes and ML insights
